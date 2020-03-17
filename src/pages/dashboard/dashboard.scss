@@ -1,0 +1,234 @@
+@import '../../mixins.scss';
+#components-layout-demo-custom-trigger .trigger {
+  font-size: 20px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.dashboard {
+  position: relative;
+  .desktop-sider, .desktop-header {
+    @include mobile() {
+      display: none;
+    }
+  }
+  .mobile-sider {
+    max-width: 200px;
+    min-width: 200px;
+    width: 200px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin: 0;
+    height: 100%;
+    height: 100vh;
+    height: -moz-calc(100%);
+    padding-bottom: 60px;
+    z-index: 999;
+    overflow-y: auto;
+    box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
+    @include desktop() {
+      display: none;
+    }
+    @include mini-desktop() {
+      display: none;
+    }
+  }
+  .mobile-header {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h3 {
+      margin-top: 0.5rem;
+      font-weight: 900;
+    }
+    @include desktop() {
+      display: none;
+    }
+    @include mini-desktop() {
+      display: none;
+    }
+  }
+  .nav-mobile {
+    display: inline-block;
+    cursor: pointer;
+    // margin-right: 2rem;
+    // margin-top: 0.8rem;
+    @include desktop() {
+      display: none;
+    }
+    @include mini-desktop () {
+      display: block;
+    }
+    .bar1, .bar2, .bar3 {
+      width: 30px;
+      height: 2px;
+      background-color: #000;
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+    @include mobile() {
+      .bar1, .bar2, .bar3 {
+        width: 30px;
+        height: 3px;
+      }
+    }
+    @include mini-desktop() {
+      .bar1, .bar2, .bar3 {
+        width: 30px;
+        height: 3px;
+      }
+    }
+  }
+  .change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  .change .bar2 {opacity: 0;}
+  .change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-5px, -8px);
+  }
+  &-main {
+    height: 100vh;
+    .bold-text {
+      display: none;
+      @include mobile() {
+        display: block;
+        font-weight: 900;
+        text-decoration: underline;
+        padding-right: 0.5rem;
+      }
+    }
+    .ant-table-tbody {
+      @include mobile() {
+        tr {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+    thead {
+      @include mobile () {
+        display: none;
+      }
+    }
+    &-logo {
+      padding: 1.3rem 1.5rem  0.3rem;
+      color: $white;
+      span.anticon.anticon-dashboard {
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
+        font-size: 20px;
+      }
+    }
+    .ant-layout-sider {
+      box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
+    }
+    .ant-layout-header {
+      padding: 0.2rem 20px 0px;
+      span.anticon.anticon-menu-fold.trigger, span.anticon.anticon-menu-unfold.trigger {
+        font-size: 20px;
+        font-weight: 900;
+      }
+    }
+    &-cards {
+      margin: 22px 10px;
+      .flashcard {
+        box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
+        border-radius: 7px;
+        @include mobile() {
+          margin-bottom: 1rem;
+        }
+        &.antblue {
+          background: $antblue;
+        }
+        &.warning {
+          background: $warning;
+        }
+        &.success {
+          background: $success;
+        }
+        &.danger {
+          background: $danger;
+        }
+        .ant-card-body {
+          padding: 0px;
+        }
+        .top {
+          padding: 2rem 2rem 2.5rem;
+          display: relative;
+          color: $white;
+          h3 {
+            color: $white;
+            width: 50%;
+          }
+        }
+        &-icon {
+          position: absolute !important;
+          z-index: 0;
+          top: 0.9rem;
+          right: 1rem;
+          font-size: 5rem;
+          -webkit-transform: rotate(15deg);
+          -ms-transform: rotate(15deg);
+          transform: rotate(15deg) !important;
+        }
+      }
+    }
+    &-bread {
+      padding: 1rem;
+      margin: 1rem 10px 0px;
+      background: $white;
+      @include mobile() {
+        margin-top: 5rem;
+      }
+    }
+    &-content {
+      margin: -1rem 10px;
+      padding: 24px 10px;
+      .holder {
+        padding: 1rem;
+      }
+      .error-holder {
+        margin-bottom: 1rem;
+      }
+      .other-details {
+        padding: 1rem;
+        @include mobile() {
+          padding: 1rem 0.5rem;;
+        }
+        .warining {
+          margin-bottom: 0.5rem;
+          font-weight: bolder;
+        }
+        .detail-holder {
+          margin-bottom: 0.5rem;
+          h4 {
+            margin-bottom: 0.1rem;
+            font-weight: bolder;
+          }
+        }
+      }
+    }
+  }
+}

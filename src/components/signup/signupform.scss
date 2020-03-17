@@ -1,0 +1,34 @@
+@import '../../mixins.scss';
+.signup {
+  .error-holder {
+    padding: 0 3rem  0.5rem !important;
+    @include mobile() {
+      padding: 0 2rem 0 !important;
+    }
+  }
+  h2 {
+    text-align: center;
+  }
+  &-form {
+    padding: 1rem 3rem 0 !important;
+    @include mobile() {
+      padding: 1rem 2rem 0 !important;
+    }
+    input {
+      font-size: 15px;
+    }
+    .signup-btn {
+      height: 2.5rem;
+    }
+  }
+  &-action {
+    border-top: 1px solid #d9d9d9;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 14px;
+    p:first-of-type {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
