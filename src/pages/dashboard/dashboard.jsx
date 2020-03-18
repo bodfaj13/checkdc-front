@@ -22,7 +22,7 @@ import axios from 'axios'
 import jwt from 'jsonwebtoken';
 import appDetails from '../../appdetails.json'
 import setAuthorizationToken from '../../core/auth';
-const { Header, Sider, Content, Footer } = Layout;
+const { Header, Sider } = Layout;
 const openNotificationWithIcon = (type, msg, desc) => {
   notification[type]({
     message: msg,
@@ -93,6 +93,7 @@ class Dashboard extends Component {
   switchMenu = (index) => {
     const { menu } = this.state
     let newMenu = menu
+    // eslint-disable-next-line
     newMenu.map((item) => {
       item.active = false
     })

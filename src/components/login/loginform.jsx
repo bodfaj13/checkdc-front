@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, Button, notification, Alert } from 'antd';
+import { Form, Input, Button, notification, Alert, message } from 'antd';
 import api from '../../config/api'
 import axios from 'axios'
 import jwt from 'jsonwebtoken';
@@ -43,10 +43,18 @@ export default class LoginForm extends Component {
       openNotificationWithIcon('success', 'User  Authenticated!', res.data.message)
       this.props.history.push('/dashboard')
     }).catch((err) => {
-      this.setState({
-        error: err.response.data.err,
-        loading: false
-      })
+      if(err.message === 'Network Error') {
+        message.error("Error: Network Error")
+        this.setState({
+          error: null,
+          loading: false
+        })
+      } else {
+        this.setState({
+          error: err.response.data.err,
+          loading: false
+        })
+      }
     })
   }
 
@@ -115,7 +123,7 @@ export default class LoginForm extends Component {
           </Form.Item>
         </Form>
         <div className="login-action">
-          <p>Don't have an account? <a href="#" onClick={(e) => this.gateway(e)}>Sign Up</a> </p>
+          <p>Don't have an account? <button onClick={(e) => this.gateway(e)}>Sign Up</button> </p>
         </div>
       </div>
     )

@@ -1,25 +1,10 @@
 import React, { Component } from 'react'
 import {
-  Layout, Row, Col, notification, Alert, Form, Input, Button, Select,
-  DatePicker
+  Layout
 } from 'antd';
 import Profile from './settingsform/profile'
 import Password from './settingsform/password'
-import api from '../../config/api'
-import axios from 'axios'
-import moment from 'moment';
 const { Content } = Layout;
-const FormItem = Form.Item;
-const { TextArea } = Input;
-const { Option } = Select;
-
-const openNotificationWithIcon = (type, msg, desc) => {
-  notification[type]({
-    message: msg,
-    description: desc
-  })
-}
-
 
 export default class Settings extends Component {
   render() {

@@ -55,6 +55,7 @@ export default class AllReminders extends Component {
 
   addkeys = (reminders) => {
     let remindersWithKey = []
+    // eslint-disable-next-line
     reminders.map((item) => {
       remindersWithKey.push({
         key: item._id,
@@ -149,13 +150,21 @@ export default class AllReminders extends Component {
       this.refreashGetReminders()
       this.props.refreashGetReminders()
     }).catch((err) => {
-      if (err.response.data.err === 'Please login to continue') {
-        openNotificationWithIcon('error', 'Authentication Denied!', 'Login to perform action!')
-        this.props.logoutUser()
-      } else {
+      if (err.message === 'Network Error') {
+        message.error("Error: Network Error")
         this.setState({
-          error: err.response.data.err,
+          error: null,
+          loading: false
         })
+      } else {
+        if (err.response.data.err === 'Please login to continue') {
+          openNotificationWithIcon('error', 'Authentication Denied!', 'Login to perform action!')
+          this.props.logoutUser()
+        } else {
+          this.setState({
+            error: err.response.data.err,
+          })
+        }
       }
     })
   }

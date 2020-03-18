@@ -58,6 +58,7 @@ export default class AllPrescriptions extends Component {
 
   addkeys = (prescriptions) => {
     let prescriptionsWithKey = []
+    // eslint-disable-next-line
     prescriptions.map((item) => {
       prescriptionsWithKey.push({
         key: item._id,
@@ -151,13 +152,21 @@ export default class AllPrescriptions extends Component {
       this.refreashGetPrescriptions()
       this.props.refreashGetPrescriptions()
     }).catch((err) => {
-      if (err.response.data.err === 'Please login to continue') {
-        openNotificationWithIcon('error', 'Authentication Denied!', 'Login to perform action!')
-        this.props.logoutUser()
-      } else {
+      if (err.message === 'Network Error') {
+        message.error("Error: Network Error")
         this.setState({
-          error: err.response.data.err,
+          error: null,
+          loading: false
         })
+      } else {
+        if (err.response.data.err === 'Please login to continue') {
+          openNotificationWithIcon('error', 'Authentication Denied!', 'Login to perform action!')
+          this.props.logoutUser()
+        } else {
+          this.setState({
+            error: err.response.data.err,
+          })
+        }
       }
     })
   }
@@ -170,13 +179,21 @@ export default class AllPrescriptions extends Component {
       this.refreashGetPrescriptions()
       this.props.refreashGetPrescriptions()
     }).catch((err) => {
-      if (err.response.data.err === 'Please login to continue') {
-        openNotificationWithIcon('error', 'Authentication Denied!', 'Login to perform action!')
-        this.props.logoutUser()
-      } else {
+      if (err.message === 'Network Error') {
+        message.error("Error: Network Error")
         this.setState({
-          error: err.response.data.err,
+          error: null,
+          loading: false
         })
+      } else {
+        if (err.response.data.err === 'Please login to continue') {
+          openNotificationWithIcon('error', 'Authentication Denied!', 'Login to perform action!')
+          this.props.logoutUser()
+        } else {
+          this.setState({
+            error: err.response.data.err,
+          })
+        }
       }
     })
   }

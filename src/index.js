@@ -4,7 +4,9 @@ import './index.css';
 import 'antd/dist/antd.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+// import provider
 import { Provider } from 'react-redux'
+// import created store
 import store from './core/store'
 
 ReactDOM.render(

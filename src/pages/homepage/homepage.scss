@@ -7,7 +7,7 @@
   &-main {
     padding: 8rem 0px;
     @include mobile() {
-      padding: 2rem 2rem 5rem;
+      padding: 3.5rem 2rem 5rem;
     }
     img.app-logo {
       height: 2.5rem;
@@ -34,7 +34,7 @@
       @include mobile() {
         width: 100%;
         .ant-card-body {
-          padding: 2rem 0px;
+          padding: 1rem 0px;
         }
       }
     }

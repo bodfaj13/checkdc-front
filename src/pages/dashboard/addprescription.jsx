@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
   Layout, Row, Col, notification, Alert, Form, Input, Button, Select,
-  DatePicker
+  DatePicker, message
 } from 'antd';
 import api from '../../config/api'
 import axios from 'axios'
@@ -62,20 +62,27 @@ export default class AddPrescription extends Component {
       openNotificationWithIcon('success', 'Prescription added!', res.data.message)
       this.props.refreashGetPrescriptions()
     }).catch((err) => {
-      if (err.response.data.err === 'Please login to continue') {
-        openNotificationWithIcon('error', 'Authentication Denied!', 'Login to perform action!')
-        this.props.logoutUser()
-      } else {
+      if (err.message === 'Network Error') {
+        message.error("Error: Network Error")
         this.setState({
-          error: err.response.data.err,
+          error: null,
           loading: false
         })
+      } else {
+        if (err.response.data.err === 'Please login to continue') {
+          openNotificationWithIcon('error', 'Authentication Denied!', 'Login to perform action!')
+          this.props.logoutUser()
+        } else {
+          this.setState({
+            error: err.response.data.err,
+            loading: false
+          })
+        }
       }
     })
   }
 
   onFinishFailed = errorInfo => {
-    console.log(errorInfo)
     this.setState({
       loading: false,
       error: null

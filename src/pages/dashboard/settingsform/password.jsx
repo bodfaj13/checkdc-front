@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
-import {
-  Layout, Row, Col, notification, Alert, Form, Input, Button, Select,
-  DatePicker
+import { Row, Col, notification, Alert, Form, Input, Button, message
 } from 'antd';
 import api from '../../../config/api'
 import axios from 'axios'
-import moment from 'moment';
-const { Content } = Layout;
 const FormItem = Form.Item;
-const { TextArea } = Input;
-const { Option } = Select;
 
 const openNotificationWithIcon = (type, msg, desc) => {
   notification[type]({
@@ -46,20 +40,27 @@ export default class Password extends Component {
       openNotificationWithIcon('success', 'Profile Updated!', res.data.message)
       this.formRef.current.resetFields()
     }).catch((err) => {
-      if (err.response.data.err === 'Please login to continue') {
-        openNotificationWithIcon('error', 'Authentication Denied!', 'Login to perform action!')
-        this.props.logoutUser()
-      } else {
+      if (err.message === 'Network Error') {
+        message.error("Error: Network Error")
         this.setState({
-          error: err.response.data.err,
+          error: null,
           loading: false
         })
+      } else {
+        if (err.response.data.err === 'Please login to continue') {
+          openNotificationWithIcon('error', 'Authentication Denied!', 'Login to perform action!')
+          this.props.logoutUser()
+        } else {
+          this.setState({
+            error: err.response.data.err,
+            loading: false
+          })
+        }
       }
     })
   }
 
   onFinishFailed = errorInfo => {
-    console.log(errorInfo)
     this.setState({
       loading: false,
       error: null
@@ -68,7 +69,6 @@ export default class Password extends Component {
 
   render() {
     const { loading, error } = this.state
-    const { user } = this.props
    return (
       <div>
         <h3>Change Password</h3>
